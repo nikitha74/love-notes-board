@@ -1,0 +1,63 @@
+<div class="love-notes-page">
+  <div class="header-section">
+    <div class="hearts-animation">
+      <span class="heart">❤️</span>
+      <span class="heart">💕</span>
+      <span class="heart">💖</span>
+      <span class="heart">💗</span>
+      <span class="heart">💝</span>
+    </div>
+    <h1 class="main-title">💌 Love Notes Board 💌</h1>
+    <p class="subtitle">Share your love, spread the joy!</p>
+  </div>
+
+  <div class="container">
+    <app-love-note-form 
+      [editMode]="editMode"
+      [loveNote]="currentNote"
+      (submitNote)="onSubmitNote($event)"
+      (cancelEdit)="onCancelEdit()">
+    </app-love-note-form>
+
+    <div class="notes-section">
+      <div class="section-header">
+        <h2>💝 All Love Notes ({{ loveNotes.length }})</h2>
+      </div>
+
+      <div class="empty-state" *ngIf="loveNotes.length === 0">
+        <div class="empty-icon">💔</div>
+        <h3>No love notes yet!</h3>
+        <p>Be the first to spread some love 💕</p>
+      </div>
+
+      <div class="notes-grid">
+        <div class="note-card" *ngFor="let note of loveNotes">
+          <div class="note-content">
+            <div class="note-icon">💌</div>
+            <p class="note-message">{{ note.message }}</p>
+          </div>
+          
+          <div class="note-footer">
+            <div class="note-author">
+              <span class="author-icon">{{ note.isAnonymous ? '🎭' : '👤' }}</span>
+              <span class="author-name">{{ note.isAnonymous ? 'Anonymous' : note.authorName }}</span>
+            </div>
+            
+            <div class="note-actions">
+              <button class="action-btn edit-btn" (click)="onEdit(note)" title="Edit">
+                ✏️
+              </button>
+              <button class="action-btn delete-btn" (click)="onDelete(note.id)" title="Delete">
+                🗑️
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>Made with 💖 for Valentine's Day</p>
+  </div>
+</div>

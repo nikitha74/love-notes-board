@@ -1,0 +1,30 @@
+# Backend (Java/Maven)
+lovenotes/target/
+lovenotes/.mvn/
+lovenotes/*.log
+lovenotes/.idea/
+lovenotes/*.iml
+
+# Frontend (Angular/Node)
+lovenotes-frontend/node_modules/
+lovenotes-frontend/.angular/
+lovenotes-frontend/dist/
+lovenotes-frontend/*.log
+
+# Environment files
+**/.env
+**/.env.local
+**/application-local.properties
+
+# Docker
+mysql-data/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo

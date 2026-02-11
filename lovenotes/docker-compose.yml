@@ -1,0 +1,47 @@
+services:
+  # MySQL Database
+  mysql:
+    image: mysql:8.0
+    container_name: lovenotes-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: nikitha
+      MYSQL_DATABASE: valentine_nikitha
+    ports:
+      - "3307:3306"  # Changed to 3307 to avoid conflict with local MySQL
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - lovenotes-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Spring Boot Backend
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: lovenotes-backend
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: valentine_lovenotes
+      DB_USER: root
+      DB_PASSWORD: rootpassword
+      CORS_ORIGINS: http://localhost:4200,http://localhost
+    ports:
+      - "8080:8080"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - lovenotes-network
+
+volumes:
+  mysql-data:
+
+networks:
+  lovenotes-network:
+    driver: bridge
