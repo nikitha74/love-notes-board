@@ -64,6 +64,7 @@ cd lovenotes
 # Update src/main/resources/application.properties with your MySQL credentials
 # Make sure MySQL is running on localhost:3306
 
+
 ./mvnw spring-boot:run
 Frontend
 cd lovenotes-frontend
